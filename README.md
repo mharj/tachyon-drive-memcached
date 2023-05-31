@@ -9,7 +9,7 @@ This package provides an implementation of the Tachyon Drive `StorageDriver` int
 To install this package, run the following command:
 
 ```bash
-npm install tachyon-drive-memcached
+npm install tachyon-drive-memcached tachyon-drive
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ To use this package, you first need to create an instance of the MemcachedStorag
 const driver = new MemcachedStorageDriver(
 	'MemcachedStorageDriver',
 	'store-key',
-	2592000, // max from Memcache options, 30 days
+	2592000, // max from default Memcache options, 30 days
 	bufferSerializer,
 );
 ```
