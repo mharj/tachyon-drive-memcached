@@ -1,5 +1,5 @@
 import * as Memcached from 'memcached';
-import {IPersistSerializer, IStoreProcessor, StorageDriver} from 'tachyon-drive';
+import {IExternalNotify, IPersistSerializer, IStoreProcessor, StorageDriver} from 'tachyon-drive';
 import {mcGet, mcRemove, mcSet, mcTouch} from './memcacheUtils';
 import {ILoggerLike} from '@avanio/logger-like';
 
@@ -29,11 +29,12 @@ export class MemcachedStorageDriver<Input> extends StorageDriver<Input, Buffer> 
 		lifetime: number,
 		serializer: IPersistSerializer<Input, Buffer>,
 		urls: URLsOrURLsProvider = [new URL('memcached://localhost:11211')],
+		extNotify?: IExternalNotify,
 		options?: Memcached.options | undefined,
 		processor?: IStoreProcessor<Buffer>,
 		logger?: ILoggerLike | Console,
 	) {
-		super(name, serializer, processor, logger);
+		super(name, serializer, extNotify || null, processor, logger);
 		this.urls = urls;
 		this.options = options;
 		this.key = key;
